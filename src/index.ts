@@ -1,18 +1,28 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.toml`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { EmailKit, EmailRouter, SizeGuard } from 'cloudflare-email';
+import { Backup } from 'cloudflare-email-backup'
+
+export interface Env {
+	R2: R2Bucket,
+	D1: D1Database
+}
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+	async email(message: ForwardableEmailMessage, env: Env): Promise<void> {
+		const kit = new EmailKit()
+			.use(new SizeGuard(10 * 1024 * 1024))
+			.use(new Backup({
+				bucket: env.R2,
+				prefix: 'backup',
+				database: env.D1,
+				table: 'emails'
+			}))
 	},
-};
+	async fetch(batch: MessageBatch<void>, env: Env): Promise<void> {
+		const backup = new Backup({
+				bucket: env.R2,
+				prefix: 'backup',
+				database: env.D1,
+				table: 'emails'
+			})
+	}
+}
