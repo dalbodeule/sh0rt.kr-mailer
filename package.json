@@ -3,16 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest",
-    "cf-typegen": "wrangler types"
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "npm run build && wrangler dev",
+    "start": "npm run build && wrangler dev",
+    "cf-typegen": "wrangler types",
+    "build": "node esbuild.mjs",
+  	"create_meta": "drizzle-kit generate"
   },
   "module": "dist/index.mjs",
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.1.0",
     "@cloudflare/workers-types": "^4.20240524.0",
+    "cloudflare-workers-compat": "^0.1.15",
+    "esbuild": "^0.21.4",
     "typescript": "^5.0.4",
     "vitest": "1.3.0",
     "wrangler": "^3.0.0"
@@ -20,7 +23,9 @@
   "dependencies": {
     "cloudflare-email": "^0.0.9",
     "cloudflare-email-backup": "^0.0.5",
-    "esbuild": "^0.21.4"
+    "cloudflare-email-queue": "^0.0.6",
+    "drizzle-kit": "^0.21.4",
+    "drizzle-orm": "^0.30.10"
   },
   "overrides": {
     "@types/node": "20.8.3"
