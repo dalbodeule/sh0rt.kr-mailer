@@ -1,0 +1,1 @@
+ALTER TABLE `fido_devices` ADD `transports` text;

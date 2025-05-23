@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1747987398775,
+      "tag": "0000_elite_wolverine",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1747987552004,
+      "tag": "0001_goofy_fantastic_four",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1747987592408,
+      "tag": "0002_damp_lorna_dane",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1747988277029,
+      "tag": "0003_wide_solo",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1747988526580,
+      "tag": "0004_white_maelstrom",
+      "breakpoints": true
+    }
+  ]
+}
